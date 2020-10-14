@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <!-- 主要针对db2数据库配置信息 -->
+    <!-- <classPathEntry location="/Program Files/IBM/SQLLIB/java/db2java.zip" /> -->
+    <!-- context上下文的意思 -->
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <!-- 去除注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!-- jdbc的连接信息 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/shopping"
+                        userId="root"
+                        password="123456">
+        </jdbcConnection>
+        <!-- java类型的解析器 -->
+        <javaTypeResolver>
+            <!-- 对于大文本字段是否强制处理 -->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!--
+            动态生成bean对象
+            表所生成对象存放的位置
+            targetProject：生成的bean所放置项目中的位置
+            .:代表当前项目
+            targetPackage:它指的是生成对象所放置包的位置
+        -->
+        <javaModelGenerator targetPackage="com.edu.bean" targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--
+            表示生成的mapper文件存放的位置
+            动态生成.xml文件
+         -->
+        <sqlMapGenerator targetPackage="mapper" targetProject=".\src\main\resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!--
+            动态生成接口文件
+         -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.edu.mapper" targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <!--
+            table代表表
+            table代表表的名字
+            domainObjectName 这表所对应的实体对象名字
+         -->
+
+        <table tableName="employee" domainObjectName="Employee"></table>
+        <table tableName="department" domainObjectName="Department"></table>
+    </context>
+</generatorConfiguration>
